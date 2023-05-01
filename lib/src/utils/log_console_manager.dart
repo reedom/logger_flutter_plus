@@ -72,9 +72,10 @@ class LogConsoleManager extends ChangeNotifier {
     final filePath = '${tempDir.path}/$fileName';
     final f = File(filePath);
     f.writeAsStringSync(buffer.toString(), flush: true);
-    final xFile = XFile(filePath, mimeType: 'text/plain');
-    await Share.shareXFiles(
-      [xFile],
+    // final xFile = XFile(filePath, mimeType: 'text/plain');
+    await Share.shareFilesWithResult(
+      [filePath],
+      mimeTypes: ['text/plain'],
       subject: 'logfile-${DateTime.now()}',
     );
     f.deleteSync();
