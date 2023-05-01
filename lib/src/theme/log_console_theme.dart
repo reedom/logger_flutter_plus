@@ -13,7 +13,7 @@ class LogConsoleTheme {
   ) =>
       LogConsoleTheme._(
         bottomAppBarColor:
-            theme.bottomAppBarTheme.color ?? theme.bottomAppBarTheme.color!,
+            theme.bottomAppBarTheme.color ?? theme.bottomAppBarColor,
         scaffoldBackgroundColor: theme.scaffoldBackgroundColor,
         bodyLarge: theme.textTheme.bodyLarge,
       );
