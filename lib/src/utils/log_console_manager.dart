@@ -1,16 +1,20 @@
 import 'dart:collection';
+import 'dart:io';
 
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:logger_flutter_plus/logger_flutter_plus.dart';
 import 'package:logger_flutter_plus/src/models/log_rendered_event.dart';
 import 'package:logger_flutter_plus/src/utils/ansi_parser.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:share_plus/share_plus.dart';
 
 class LogConsoleManager extends ChangeNotifier {
   LogConsoleManager({
     required bool isDark,
   }) : _ansiParser = AnsiParser(isDark);
 
+  final ListQueue<OutputEvent> _events = ListQueue();
   final ListQueue<LogRenderedEvent> _buffer = ListQueue();
   final AnsiParser _ansiParser;
 
@@ -41,6 +45,7 @@ class LogConsoleManager extends ChangeNotifier {
   }
 
   void addLog(OutputEvent event) {
+    _events.add(event);
     final text = event.lines.join('\n');
     _ansiParser.parse(text);
 
@@ -53,5 +58,25 @@ class LogConsoleManager extends ChangeNotifier {
 
     _buffer.add(logEvent);
     notifyListeners();
+  }
+
+  Future<void> shareLogText() async {
+    final buffer = StringBuffer();
+    for (final event in _events) {
+      buffer.write(event.lines.join('\n'));
+      buffer.write('\n');
+    }
+
+    final tempDir = await getTemporaryDirectory();
+    final fileName = 'log-${DateTime.now().microsecondsSinceEpoch}.txt';
+    final filePath = '${tempDir.path}/$fileName';
+    final f = File(filePath);
+    f.writeAsStringSync(buffer.toString(), flush: true);
+    final xFile = XFile(filePath, mimeType: 'text/plain');
+    await Share.shareXFiles(
+      [xFile],
+      subject: 'logfile-${DateTime.now()}',
+    );
+    f.deleteSync();
   }
 }

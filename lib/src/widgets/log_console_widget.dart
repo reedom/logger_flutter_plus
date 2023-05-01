@@ -74,6 +74,7 @@ class _LogConsoleWidgetState extends State<LogConsoleWidget> {
             LogConsoleAppBar(
               theme: widget.theme,
               showCloseButton: widget.showCloseButton,
+              onShareLogText: widget.logConsoleManager.shareLogText,
               onDecreaseFontSize: () {
                 setState(() {
                   _logFontSize--;

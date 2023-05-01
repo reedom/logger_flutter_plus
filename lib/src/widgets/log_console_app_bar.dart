@@ -5,6 +5,7 @@ class LogConsoleAppBar extends StatelessWidget {
   const LogConsoleAppBar({
     super.key,
     this.showCloseButton = true,
+    required this.onShareLogText,
     required this.onIncreaseFontSize,
     required this.onDecreaseFontSize,
     required this.onClearLogs,
@@ -13,6 +14,7 @@ class LogConsoleAppBar extends StatelessWidget {
 
   final bool showCloseButton;
 
+  final VoidCallback onShareLogText;
   final VoidCallback onDecreaseFontSize;
   final VoidCallback onIncreaseFontSize;
   final VoidCallback onClearLogs;
@@ -35,6 +37,10 @@ class LogConsoleAppBar extends StatelessWidget {
             ),
           ),
           Spacer(),
+          IconButton(
+            icon: Icon(Icons.share),
+            onPressed: onShareLogText,
+          ),
           IconButton(
             icon: Icon(Icons.add),
             onPressed: onIncreaseFontSize,
