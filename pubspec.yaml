@@ -12,8 +12,8 @@ dependencies:
     sdk: flutter
 
   logger: ^2.0.1
-  collection: ^1.16.0
-  path_provider: ^2.0.14
-  sensors_plus: ^2.0.1
-  share_plus: ^4.0.4
-  async: ^2.10.0
+  collection: ^1.17.1
+  path_provider: ^2.0.15
+  sensors_plus: ^3.0.2
+  share_plus: ^7.0.2
+  async: ^2.11.0
