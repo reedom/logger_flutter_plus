@@ -34,6 +34,7 @@ class AppLogOutput extends LogOutput {
   AppLogOutput({
     required this.logConsoleManager,
   });
+
   final LogConsoleManager logConsoleManager;
 
   @override
@@ -42,7 +43,7 @@ class AppLogOutput extends LogOutput {
   }
 
   @override
-  void destroy() {
+  Future<void> destroy() async {
     logConsoleManager.dispose();
     super.destroy();
   }
@@ -55,7 +56,7 @@ void log(Logger logger, Logger loggerNoStack) {
 
   loggerNoStack.w("Just a warning!");
 
-  logger.e("Error! Something bad happened", "Test Error");
+  logger.e("Error! Something bad happened", error: "Test Error");
 
   loggerNoStack.v({"key": 5, "value": "something"});
 

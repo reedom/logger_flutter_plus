@@ -5,14 +5,15 @@ version: 1.0.5
 homepage: https://github.com/Oliinyk-Volodymyr/logger_flutter_plus
 
 environment:
-  sdk: ">=2.17.0 <3.0.0"
+  sdk: ">=3.0.0 <4.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
 
-  logger: ^1.1.0
+  logger: ^2.0.1
   collection: ^1.16.0
   path_provider: ^2.0.14
   sensors_plus: ^2.0.1
   share_plus: ^4.0.4
+  async: ^2.10.0
